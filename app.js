@@ -1,10 +1,6 @@
-// localStorage.clear();
-
 function serch(){
     //alert("click");
     let place = document.getElementById('place');
-    
-    //var list = [['映画館','3D眼鏡','席の確保','チケット','ポップコーン'],['大学','パソコン','お弁当','定期券','スマホ','帽子'];
 
     if(place.value){
         console.log("set");
@@ -12,13 +8,13 @@ function serch(){
         deleate();
         
         //listの照会
-        var list = JSON.parse(localStorage.getItem(place.value));
-        if(list){
+        var item_list = JSON.parse(localStorage.getItem(place.value));
+        if(item_list){
         //表示の処理
-            for(var i = 0; i < list.length; i++){
+            for(var i = 0; i < item_list.length; i++){
                 var li = document.createElement('li',id = 'child');
-                li.textContent = list[i];
-                document.getElementById('list').appendChild(li);
+                li.textContent = item_list[i];
+                document.getElementById('item_list').appendChild(li);
             }
         }else{
             alert("no item");
@@ -30,7 +26,7 @@ function serch(){
 }
 
 function deleate(){
-    li = document.getElementById('list')
+    li = document.getElementById('item_list')
     children = li.children;
     while (children.length > 0) {
         li.removeChild(children[0]);
@@ -46,7 +42,7 @@ function add(){
         //listタグに追加し、表示
         var li = document.createElement('li',id = 'child');
         li.textContent = addItem.value;
-        document.getElementById('list').appendChild(li);
+        document.getElementById('item_list').appendChild(li);
 
         //localstrageに追加
         //行き先が設定されてなかった場合
@@ -59,4 +55,37 @@ function add(){
         alert("no Item");
     }
     addItem.value = '';
+}
+
+function submit(){
+    var parent = document.getElementById('goto_list');
+    while( parent.firstChild ){
+        parent.removeChild( parent.firstChild );
+    }
+
+    for (var i = 0; i < localStorage.length; i++) {
+        var itemList = document.createElement('li'); 
+　      itemList.textContent = localStorage.key(i);
+　      document.getElementById('goto_list').appendChild(itemList); 
+    }
+
+    if(!localStorage.getItem(place.value)){
+        alert("持ち物が追加されていません");
+    }
+
+}
+
+//loadされたら登録されている行き先を表示
+window.onload = function () {
+    for (var i = 0; i < localStorage.length; i++) {
+        var itemList = document.createElement('li'); 
+        itemList.id = 'goto_item';
+　      itemList.textContent = localStorage.key(i);
+　      document.getElementById('goto_list').appendChild(itemList); 
+    }
+    if(localStorage.length==0){
+        var itemList = document.createElement('li');
+        itemList.textContent = "まだ行き先が登録されていません！";
+        document.getElementById('goto_list').appendChild(itemList); 
+    }
 }

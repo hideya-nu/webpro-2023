@@ -1,16 +1,33 @@
+<head>
+    <meta charset="utf-8">
+    <title>行き先で持ち物</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+
+<body>
+<h1>行き先で持ち物検索＆登録</h1>
+
 <div class="memoApp">
-    <lavel for="name">行き先入力欄</lavel>
+    <lavel for="name">行き先検索欄</lavel>
     <input type="text" id="place"/>
     <button type="button" onclick="serch()">検索</button>
+    <button type="button" onclick="submit()">登録</button>
 
-    <ul id = "list">
-        <li></li>
-        <li></li>
-        <li></li>        
-    </ul>
-    <lavel for="name">持ち物追加</lavel>
-    <input type="text" id="addItem" />
-    <button type="button" onclick="add()">追加</button>
 </div>
+
+<div class = "item_list">
+    <p>登録された持ち物リスト</p>
+    <ul id = "item_list"></ul>
+<lavel for="name">持ち物追加</lavel>
+<input type="text" id="addItem" />
+<button type="button" onclick="add()">追加</button>
+</div>
+
+<div class="goto_lists">
+    <p>登録済みの行き先リスト</p>
+    <div id="goto_list">
+    </div>
+</div>
+</body>
 
 <script src="app.js"></script>
